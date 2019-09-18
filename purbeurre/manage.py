@@ -3,8 +3,6 @@
 import os
 import sys
 
-from dotenv import load_dotenv
-
 
 def main():
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'purbeurre.settings')
@@ -20,5 +18,4 @@ def main():
 
 
 if __name__ == '__main__':
-    load_dotenv()
     main()

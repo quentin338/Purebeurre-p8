@@ -46,11 +46,11 @@ class OpenFoodFactsAPI:
 
         return list_categories
 
-    def get_products(self):
+    def get_products(self) -> dict:
         """
-        Get self.number_products_by_category products
+        Get generator of products dictionary with name/category/image/nutriscore/ingredients_image/code
 
-        :return:
+        :return: product dict
 
         """
         # Only 20 are returned by page so we need to calculate how many of them we need to go through
@@ -79,18 +79,21 @@ class OpenFoodFactsAPI:
                     if not self._check_product_is_fr(product):
                         continue
 
-                    product_dict = {
-                        'name': product.get('product_name_fr'),
-                        'category': category,
-                        'image': product.get('image_url'),
-                        'nutriscore': product.get('nutrition_score_debug'),
-                        'ingredients': product.get('ingredients_text_fr'),
-                    }
+                    try:
+                        product_dict = {
+                            'name': product['product_name_fr'],
+                            'category': category,
+                            'image': product['image_url'],
+                            'nutriscore': product['nutrition_score_debug'],
+                            'ingredients_image': product['selected_images']['ingredients']['display']['fr'],
+                            'code': product['code']
+                        }
+                    except KeyError:
+                        continue
 
                     # One value is missing or we don't have the french nutriscore
                     product_values = set(product_dict.values())
-                    if None in product_values or "" in product_values or \
-                            "-- fr" not in product_dict['nutriscore']:
+                    if "" in product_values or "-- fr" not in product_dict['nutriscore']:
                         continue
 
                     # Notes are on the form X | -X | XX at the end of the string - FR note always at the end
@@ -129,7 +132,7 @@ class OpenFoodFactsAPI:
 
 
 if __name__ == "__main__":
-    api = OpenFoodFactsAPI(10, 2)
+    api = OpenFoodFactsAPI(number_categories=10, number_products_by_category=2)
 
     for prod in api.get_products():
         print(prod)
