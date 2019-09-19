@@ -61,7 +61,6 @@ class OpenFoodFactsAPI:
             page_number = 1
 
             while products_added < self._number_products_by_category:
-                print(self._PRODUCTS_URL.format(category, page_number))
                 response = requests.get(self._PRODUCTS_URL.format(category, page_number))
 
                 if not response.content or response.status_code != 200:
@@ -83,7 +82,7 @@ class OpenFoodFactsAPI:
                         product_dict = {
                             'name': product['product_name_fr'],
                             'category': category,
-                            'image': product['image_url'],
+                            'image_url': product['image_url'],
                             'nutriscore': product['nutrition_score_debug'],
                             'ingredients_image': product['selected_images']['ingredients']['display']['fr'],
                             'code': product['code']
