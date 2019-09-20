@@ -9,8 +9,9 @@ class OpenFoodFactsException(Exception):
 
 class OpenFoodFactsAPI:
     _OFF_URL = "https://fr.openfoodfacts.org/"
-    _PRODUCTS_URL = "https://fr.openfoodfacts.org/category/{}/{}.json"
-    _PRODUCTS_BY_PAGE = 20
+    # _PRODUCTS_URL = "https://fr.openfoodfacts.org/category/{}/{}.json"
+    _PRODUCTS_BY_PAGE = 250
+    _PRODUCTS_URL = "https://fr.openfoodfacts.org/cgi/search.pl"
 
     def __init__(self, number_categories, number_products_by_category):
         self._number_categories = number_categories
@@ -48,20 +49,34 @@ class OpenFoodFactsAPI:
 
     def get_products(self) -> dict:
         """
-        Get generator of products dictionary with name/category/image/nutriscore/ingredients_image/code
+        Get generator of products dictionary with name/category/image_url/nutriscore/ingredients_image_url/code
 
         :return: product dict
 
         """
-        # Only 20 are returned by page so we need to calculate how many of them we need to go through
-        # number_of_pages = math.ceil(self._number_products_by_category / self._PRODUCTS_BY_PAGE)
-
         for category in self.categories:
             products_added = 0
             page_number = 1
 
             while products_added < self._number_products_by_category:
-                response = requests.get(self._PRODUCTS_URL.format(category, page_number))
+                params = {
+                    'action': 'process',
+                    'tagtype_0': 'countries',
+                    'tag_contains_0': 'contains',
+                    'tag_0': 'fr',
+                    'tagtype_1': 'languages',
+                    'tag_contains_1': 'contains',
+                    'tag_1': 'fr',
+                    'tagtype_2': 'categories',
+                    'tag_contains_2': 'contains',
+                    'tag_2': category,
+                    'sort_by': 'unique_scans_n',
+                    'page_size': str(self._PRODUCTS_BY_PAGE),
+                    'page': str(page_number),
+                    'json': 'true'
+                }
+
+                response = requests.get(self._PRODUCTS_URL, params=params)
 
                 if not response.content or response.status_code != 200:
                     raise OpenFoodFactsException(f"Error when retrieving products from category : {category}, "
@@ -73,7 +88,6 @@ class OpenFoodFactsAPI:
                 except (TypeError, KeyError):
                     raise OpenFoodFactsException(f"Error when retrieving products from category : {category}, "
                                                  f"response.content - {response.content}")
-
                 for product in products:
                     if not self._check_product_is_fr(product):
                         continue
@@ -131,7 +145,10 @@ class OpenFoodFactsAPI:
 
 
 if __name__ == "__main__":
-    api = OpenFoodFactsAPI(number_categories=10, number_products_by_category=2)
+    import timeit
+    api = OpenFoodFactsAPI(number_categories=10, number_products_by_category=100)
 
-    for prod in api.get_products():
-        print(prod)
+    print(timeit.timeit("for prod in api.get_products(): print(prod)", globals=globals(), number=1))
+    # for prod in api.get_products():
+    #     print(prod)
+
