@@ -9,7 +9,6 @@ class OpenFoodFactsException(Exception):
 
 class OpenFoodFactsAPI:
     _OFF_URL = "https://fr.openfoodfacts.org/"
-    # _PRODUCTS_URL = "https://fr.openfoodfacts.org/category/{}/{}.json"
     _PRODUCTS_BY_PAGE = 250
     _PRODUCTS_URL = "https://fr.openfoodfacts.org/cgi/search.pl"
 
@@ -61,6 +60,7 @@ class OpenFoodFactsAPI:
             page_number = 1
 
             while products_added < self._number_products_by_category:
+                # Filtering products
                 params = {
                     'action': 'process',
                     'tagtype_0': 'countries',
@@ -119,6 +119,8 @@ class OpenFoodFactsAPI:
                     except ValueError:
                         continue
 
+                    # Checking that the product is unique based on his name
+                    # To avoid breaking unicity constraint SQL side
                     product_name = product_dict['name']
                     if product_name in unique_products:
                         continue
