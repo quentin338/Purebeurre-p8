@@ -54,6 +54,8 @@ class OpenFoodFactsAPI:
         :return: product dict
 
         """
+        unique_products = set()
+
         for category in self.categories:
             products_added = 0
             page_number = 1
@@ -116,6 +118,12 @@ class OpenFoodFactsAPI:
                         product_dict['nutriscore'] = int(nutriscore)
                     except ValueError:
                         continue
+
+                    product_name = product_dict['name']
+                    if product_name in unique_products:
+                        continue
+                    else:
+                        unique_products.add(product_name)
 
                     yield product_dict
 

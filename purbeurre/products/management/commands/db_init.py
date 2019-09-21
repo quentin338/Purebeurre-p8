@@ -27,19 +27,15 @@ class Command(BaseCommand):
 
         # Adding products
         print(f"\nAdding {number_categories * number_products} products, it can take a little while", end="")
-        i = 0
 
         for api_product in api.get_products():
             api_product['category'] = Category.objects.get(name=api_product['category'])
             product = Product(**api_product)
 
-            # Taking care of duplicates. We print a dot every 100 products to signal that it's working
+            # Taking care of duplicates if any (sanity check even with a set() in api.get_products())
             try:
                 product.save()
-                i += 1
-                if not i % 50:
-                    print(".", end="")
-            except IntegrityError:
+            except IntegrityError:  # Unicity constraint
                 continue
 
         print(f"\nSuccessfully added {len(Product.objects.all())} products and "
