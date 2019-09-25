@@ -26,7 +26,7 @@ class Command(BaseCommand):
             print(".", end="")
 
         # Adding products
-        print(f"\nAdding {number_categories * number_products} products, it can take a little while", end="")
+        print(f"\nAdding {number_categories * number_products} products, it can take a little while...")
 
         for api_product in api.get_products():
             api_product['category'] = Category.objects.get(name=api_product['category'])
