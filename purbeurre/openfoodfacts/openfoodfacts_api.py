@@ -96,12 +96,12 @@ class OpenFoodFactsAPI:
 
                     try:
                         product_dict = {
+                            'code': product['code'],
                             'name': product['product_name_fr'],
-                            'category': category,
                             'image_url': product['image_url'],
                             'nutriscore': product['nutrition_score_debug'],
                             'ingredients_image': product['selected_images']['ingredients']['display']['fr'],
-                            'code': product['code']
+                            'category': category
                         }
                     except KeyError:
                         continue
@@ -140,7 +140,7 @@ class OpenFoodFactsAPI:
     @staticmethod
     def _check_product_is_fr(product: dict) -> bool:
         """
-        Return True if product is French
+        Return True if product is French. Some products can fake their way through even with this check
 
         :param product: dict of the product
         :return: bool - is French
