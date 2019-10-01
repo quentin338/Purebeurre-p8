@@ -22,6 +22,6 @@ class Product(models.Model):
     @staticmethod
     def search_products(user_search):
         results = Product.objects.filter(name__icontains=user_search).order_by('-nutriscore')[:5]
-        results = [prod.name for prod in results]
+        results = [product.name for product in results]
 
         return results

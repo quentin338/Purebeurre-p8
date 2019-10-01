@@ -23,6 +23,6 @@ def product_search(request):
     print(user_search)
 
     if user_search is not None:
-        results = Product.search_products(user_search=user_search)
+        results = Product.search_products(user_search)
 
         return JsonResponse(results, safe=False)
