@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 
 from .forms import SearchForm
 from .models import Product, Category
@@ -11,8 +11,6 @@ def index(request):
     if form.is_valid():
         user_search = form.cleaned_data['search']
 
-        results = Product.objects.filter(name__icontains=user_search)
-
     return render(request, "products/index.html", locals())
 
 
@@ -21,4 +19,10 @@ def detail(request, product_id):
 
 
 def product_search(request):
-    return render(request, "products/index.html")
+    user_search = request.GET.get('term')
+    print(user_search)
+
+    if user_search is not None:
+        results = Product.search_products(user_search=user_search)
+
+        return JsonResponse(results, safe=False)

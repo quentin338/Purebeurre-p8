@@ -18,3 +18,10 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+    @staticmethod
+    def search_products(user_search):
+        results = Product.objects.filter(name__icontains=user_search).order_by('-nutriscore')[:5]
+        results = [prod.name for prod in results]
+
+        return results

@@ -2,11 +2,11 @@
 
 {% block title %}Yep !{% endblock %}
 
-{% block nav_search %}
-  <form action="{% url 'index' %}" method="post">
+{% block search %}
+  <form action="{% url 'index' %}" method="post" class="search-form">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Submit" />
+    <input type="submit" value="Submit"/>
   </form>
 {% endblock %}
 
