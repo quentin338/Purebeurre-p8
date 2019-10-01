@@ -6,14 +6,6 @@ from .models import Product, Category
 
 
 def index(request):
-    return HttpResponse("TEST !")
-
-
-def detail(request, product_id):
-    return HttpResponse("Here is the product detail !")
-
-
-def product_search(request):
     form = SearchForm(request.POST or None)
 
     if form.is_valid():
@@ -21,4 +13,12 @@ def product_search(request):
 
         results = Product.objects.filter(name__icontains=user_search)
 
-    return render(request, "products/home_test.html", locals())
+    return render(request, "products/index.html", locals())
+
+
+def detail(request, product_id):
+    return HttpResponse("Here is the product detail !")
+
+
+def product_search(request):
+    return render(request, "products/index.html")

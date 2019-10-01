@@ -1,0 +1,25 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Yep !{% endblock %}
+
+{% block nav_search %}
+  <form action="{% url 'index' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit" />
+  </form>
+{% endblock %}
+
+
+<!--{% if user_search %}-->
+<!--<p>You searched : {{ user_search }}</p>-->
+<!--{% endif %}-->
+
+<!--{% if results %}-->
+<!--<ul>-->
+<!--  {% for product in results %}-->
+<!--  <li>{{ product.name }} {{ product.nutriscore }}</li>-->
+<!--  {% endfor %}-->
+<!--{% else %} <p>No results ! Sorry !</p>-->
+<!--</ul>-->
+<!--{% endif %}-->
