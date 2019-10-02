@@ -20,8 +20,15 @@ class Product(models.Model):
         return self.name
 
     @staticmethod
-    def search_products(user_search):
+    def search_autocomplete(user_search):
         results = Product.objects.filter(name__icontains=user_search).order_by('-nutriscore')[:5]
         results = [product.name for product in results]
 
         return results
+
+    @staticmethod
+    def get_better_products(user_search):
+        product_category = Product.objects.filter(name=user_search).first().category
+        better_products = product_category.products.order_by('nutriscore')[:6]
+
+        return better_products

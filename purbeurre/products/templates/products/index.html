@@ -1,25 +1,13 @@
 {% extends 'core/base.html' %}
 
-{% block title %}Yep !{% endblock %}
+{% block intro %}Du gras, oui, mais de qualité !{% endblock %}
+
+{% block picture_product %}{% endblock %}
 
 {% block search %}
   <form action="{% url 'index' %}" method="post" class="search-form">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Submit"/>
+    <input type="submit" value="Rechercher"/>
   </form>
 {% endblock %}
-
-
-<!--{% if user_search %}-->
-<!--<p>You searched : {{ user_search }}</p>-->
-<!--{% endif %}-->
-
-<!--{% if results %}-->
-<!--<ul>-->
-<!--  {% for product in results %}-->
-<!--  <li>{{ product.name }} {{ product.nutriscore }}</li>-->
-<!--  {% endfor %}-->
-<!--{% else %} <p>No results ! Sorry !</p>-->
-<!--</ul>-->
-<!--{% endif %}-->
