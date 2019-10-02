@@ -38,11 +38,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
-<!--        <form action="{% url 'index' %}" method="post" class="search-form">-->
-<!--          {% csrf_token %}-->
-<!--          {{ form.as_p }}-->
-<!--          <input type="submit" value="Submit"/>-->
-<!--        </form>-->
+
         <ul class="navbar-nav ml-auto my-2 my-lg-0">
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#about">About</a>
@@ -285,7 +281,7 @@
   <script src='{% static "core/js/jquery-ui.min.js" %}'></script>
   
   <script type="text/javascript">$("#id_search").autocomplete({
-    source: "{% url 'product autocomplete' %}",
+    source: "{% url 'products:product_autocomplete' %}",
     minLength: 3
   });
   </script>

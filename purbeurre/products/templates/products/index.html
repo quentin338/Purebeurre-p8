@@ -5,8 +5,7 @@
 {% block picture_product %}{% endblock %}
 
 {% block search %}
-  <form action="{% url 'index' %}" method="post" class="search-form">
-    {% csrf_token %}
+  <form action="{% url 'products:product_search' %}" method="get" class="search-form">
     {{ form.as_p }}
     <input type="submit" value="Rechercher"/>
   </form>

@@ -6,13 +6,13 @@ from .models import Product, Category
 
 
 def index(request):
-    form = SearchForm(request.POST or None)
+    form = SearchForm(request.GET or None)
 
-    if form.is_valid():
-        user_search = form.cleaned_data['search']
-        return redirect("product search", user_search=user_search)
+    # if form.is_valid():
+    #     user_search = form.cleaned_data['search']
+    #     return redirect("product_search", user_search=user_search)
 
-    return render(request, "products/index.html", locals())
+    return render(request, "products/index.html", {'form': form})
 
 
 def product_autocomplete(request):
@@ -24,11 +24,16 @@ def product_autocomplete(request):
         return JsonResponse(results, safe=False)
 
 
-def product_search(request, user_search):
-    better_products = Product.get_better_products(user_search)
-    print(better_products)
+def product_search(request):
+    form = SearchForm(request.GET or None)
 
-    return render(request, "products/results.html", {'better_products': better_products, 'user_search': user_search})
+    if form.is_valid():
+        user_search = form.cleaned_data['search']
+        better_products = Product.get_better_products(user_search)
+
+        return render(request, "products/results.html", {'better_products': better_products, 'user_search': user_search})
+
+    redirect(request, "products:index")
 
 
 def detail(request, product_id):
