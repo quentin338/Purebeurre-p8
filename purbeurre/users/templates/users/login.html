@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+
+
+{% block title %}Se connecter{% endblock %}
+{% block picture_product %}{% endblock %}
+{% block story %}{% endblock %}
+
+{% block intro %}Connexion{% endblock %}
+
+{% block search %}
+  <form action="{% url 'users:user_check_login' %}" method="get" class="search-form">
+    {{ form.as_p }}
+    <input type="submit" value="Se connecter"/>
+  </form>
+{% endblock %}
