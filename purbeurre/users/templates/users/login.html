@@ -10,6 +10,7 @@
 {% block search %}
   <form action="{% url 'users:user_check_login' %}" method="get" class="search-form">
     {{ form.as_p }}
-    <input type="submit" value="Se connecter"/>
+    <input class="btn btn-light btn-xl" type="submit" value="Se connecter"/>
   </form>
+  <a class="btn btn-light btn-xl mt-2" href="{% url 'users:user_registration' %}">Créer un compte</a>
 {% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'core/base.html' %}
+
+
+{% block title %}Création de compte{% endblock %}
+{% block picture_product %}{% endblock %}
+{% block story %}{% endblock %}
+
+{% block intro %}Créez votre compte{% endblock %}
+
+{% block search %}
+  <form action="{% url 'users:user_add' %}" method="post" class="search-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input class="btn btn-light btn-xl" type="submit" value="OK"/>
+  </form>
+{% endblock %}

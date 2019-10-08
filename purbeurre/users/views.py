@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse
 from django.contrib.auth import logout, login, authenticate
+from django.db.utils import IntegrityError
 
 from .forms import UserForm
+from .models import User
 
 
 def profile(request):
@@ -42,4 +44,23 @@ def user_check_login(request):
 
 
 def create_new_user(request):
-    pass
+    form = UserForm(request.POST or None)
+
+    return render(request, "users/registration.html", {'form': form})
+
+
+def add_new_user(request):
+    form = UserForm(request.POST or None)
+
+    if form.is_valid():
+        user_mail = form.cleaned_data['email']
+        user_password = form.cleaned_data['password']
+
+        try:
+            user = User.objects.create_user(email=user_mail, password=user_password)
+            return redirect("users:user_login")
+        except IntegrityError:
+            pass
+
+    return redirect("users:user_registration")
+
