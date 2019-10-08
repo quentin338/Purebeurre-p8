@@ -10,5 +10,6 @@ urlpatterns = [
     path('new/add/', views.add_new_user, name="user_add"),
     path('login/', views.user_login, name="user_login"),
     path('login/check/', views.user_check_login, name="user_check_login"),
-    path('logout/', views.user_logout, name="user_logout")
+    path('logout/', views.user_logout, name="user_logout"),
+    path('account/', views.user_account, name="user_account"),
 ]

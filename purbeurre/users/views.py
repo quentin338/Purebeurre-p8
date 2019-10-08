@@ -64,3 +64,9 @@ def add_new_user(request):
 
     return redirect("users:user_registration")
 
+
+def user_account(request):
+    if request.user.is_authenticated:
+        return render(request, "users/account.html")
+
+    return redirect("users:user_login")
