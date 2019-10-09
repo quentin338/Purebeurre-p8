@@ -43,11 +43,13 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
 
         <ul class="navbar-nav ml-auto my-2 my-lg-0">
+          {% block navsearch %}
           <li class="nav-item">
             <form action="{% url 'products:product_search' %}" method="get" class="search-form">
               {{ form.as_p }}
             </form>
           </li>
+          {% endblock %}
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="{% url "users:user_account" %}">
               <i class="fa fa-user-o" aria-hidden="true"></i></a>
