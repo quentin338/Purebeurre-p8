@@ -59,7 +59,8 @@ def add_new_user(request):
         try:
             user = User.objects.create_user(email=user_mail, password=user_password)
             return redirect("users:user_login")
-        except IntegrityError:
+        except IntegrityError as e:
+            print(e)
             pass
 
     return redirect("users:user_registration")

@@ -29,7 +29,6 @@
 {% block script %}
   <script src='{% static "favorites/js/favorites.js" %}'></script>
   <script>
-    csrf_token = "{{ csrf_token }}";
     $(".add-fav").click(function() {
         $.post({% url "favorites:user_favorites" %},
             {product: $(this).attr("data-code")}, function(data) {
