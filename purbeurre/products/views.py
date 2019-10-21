@@ -31,10 +31,11 @@ def product_search(request):
         user_search = form.cleaned_data['search']
         better_products = Product.get_better_products(user_search)
 
-        return render(request, "products/results.html", {'better_products': better_products, 'user_search': user_search})
+        return render(request, "products/results.html", {'better_products': better_products,
+                                                         'user_search': user_search})
 
     redirect(request, "products:index")
 
 
 def detail(request, product_id):
-    return HttpResponse("Here is the product detail !")
+    return HttpResponse(f"Here is the product detail of {product_id}!")

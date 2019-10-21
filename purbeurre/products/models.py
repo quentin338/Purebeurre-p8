@@ -10,14 +10,28 @@ class Category(models.Model):
 
 class Product(models.Model):
     code = models.BigIntegerField(primary_key=True)
-    name = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=150, unique=True)
     image_url = models.CharField(max_length=200)
     nutriscore = models.SmallIntegerField()
+    nutriscore_grade = models.CharField(max_length=1)
     ingredients_image = models.CharField(max_length=200)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
 
     def __str__(self):
         return self.name
+
+    @property
+    def nutriscore_img(self):
+        """
+        If we registered a wrong nutriscore, we default it to D score
+        :return: the name of the png relative to the product nutriscore_grade
+
+        """
+        if len(self.nutriscore_grade) != 1:
+            self.nutriscore_grade = "d"
+
+        nutriscore_img = f"nutriscore_{self.nutriscore_grade}.png"
+        return nutriscore_img
 
     @staticmethod
     def search_autocomplete(user_search):

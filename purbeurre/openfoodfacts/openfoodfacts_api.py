@@ -1,4 +1,5 @@
 import json
+import re
 
 import requests
 
@@ -100,15 +101,19 @@ class OpenFoodFactsAPI:
                             'name': product['product_name_fr'],
                             'image_url': product['image_url'],
                             'nutriscore': product['nutrition_score_debug'],
+                            'nutriscore_grade': product['nutriscore_grade'],
                             'ingredients_image': product['selected_images']['ingredients']['display']['fr'],
                             'category': category
                         }
                     except KeyError:
                         continue
 
-                    # One value is missing or we don't have the french nutriscore
+                    # One value is missing or we don't have the french nutriscore or the grade is not valid
+                    # or product name is breaking 150 chars long constraint
                     product_values = set(product_dict.values())
-                    if "" in product_values or "-- fr" not in product_dict['nutriscore']:
+                    if "" in product_values or "-- fr" not in product_dict['nutriscore'] \
+                            or not re.fullmatch("[a-eA-E]", product_dict['nutriscore_grade'])\
+                            or len(product_dict['name']) > 150:
                         continue
 
                     # Notes are on the form X | -X | XX at the end of the string - FR note always at the end

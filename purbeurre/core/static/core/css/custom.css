@@ -8,3 +8,25 @@
     width: 27px;
     height: 22px
 }
+
+
+.product-display {
+    border: #1c7430 solid 1px;
+    margin-top: 1rem;
+}
+
+.product-img {
+    max-width: 10rem;
+    max-height: 10rem;
+    margin: auto;
+    width: auto;
+    height: auto;
+}
+
+.nutriscore-img {
+    border-radius: 50%;
+    width: 3rem;
+    position: relative;
+    right: 1rem;
+    bottom: 3rem;
+}
