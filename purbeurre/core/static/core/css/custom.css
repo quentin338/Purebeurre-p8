@@ -16,17 +16,43 @@
 }
 
 .product-img {
-    max-width: 10rem;
-    max-height: 10rem;
-    margin: auto;
+    max-width: 18rem;
+    max-height: 18rem;
+    margin: 1rem 0;
     width: auto;
     height: auto;
 }
 
 .nutriscore-img {
+    float: right;
     border-radius: 50%;
     width: 3rem;
     position: relative;
     right: 1rem;
-    bottom: 3rem;
+    top: 1rem;
+}
+
+.add-fav {
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 1199px) {
+    .product-img {
+        max-width: 15rem;
+        max-height: 15rem;
+    }
+}
+
+@media (max-width: 991px) {
+    .product-img {
+        max-width: 10rem;
+        max-height: 10rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .product-img {
+        max-width: 15rem;
+        max-height: 15rem;
+    }
 }
