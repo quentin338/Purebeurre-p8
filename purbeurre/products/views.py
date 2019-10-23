@@ -37,5 +37,7 @@ def product_search(request):
     redirect(request, "products:index")
 
 
-def detail(request, product_id):
-    return HttpResponse(f"Here is the product detail of {product_id}!")
+def details(request, product_id):
+    product = Product.objects.get(code=product_id)
+
+    return render(request, "products/details.html", {'product': product})

@@ -36,6 +36,10 @@
     margin-bottom: 1rem;
 }
 
+.bg-product {
+    background-repeat: no-repeat;
+}
+
 @media (max-width: 1199px) {
     .product-img {
         max-width: 15rem;

@@ -23,8 +23,8 @@ class Product(models.Model):
     @property
     def nutriscore_img(self):
         """
-        If we registered a wrong nutriscore, we default it to D score
-        :return: the name of the png relative to the product nutriscore_grade
+        Get the name of the nutriscore png relative to the nutriscore grade of the product
+        :return: the name (str) of the file
 
         """
         if len(self.nutriscore_grade) != 1:
@@ -32,6 +32,25 @@ class Product(models.Model):
 
         nutriscore_img = f"nutriscore_{self.nutriscore_grade}.png"
         return nutriscore_img
+
+    @property
+    def nutriscore_full_img(self):
+        """
+        Get the name of the full nutriscore png relative to the nutriscore grade of the product
+        :return: the name (str) of the file
+
+        """
+        if len(self.nutriscore_grade) != 1:
+            self.nutriscore_grade = "d"
+
+        nutriscore_full_img = f"nutriscore_full_{self.nutriscore_grade}.svg"
+        return nutriscore_full_img
+
+    @property
+    def url(self):
+        openff_url = "https://fr.openfoodfacts.org/produit/"
+        product_url = openff_url + str(self.code)
+        return product_url
 
     @staticmethod
     def search_autocomplete(user_search):
