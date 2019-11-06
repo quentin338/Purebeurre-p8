@@ -13,10 +13,10 @@ class OpenFoodFactsAPI:
     _PRODUCTS_BY_PAGE = 250
     _PRODUCTS_URL = "https://fr.openfoodfacts.org/cgi/search.pl"
 
-    def __init__(self, number_categories, number_products_by_category):
+    def __init__(self, number_categories, number_products_by_category, categories=None):
         self._number_categories = number_categories
         self._number_products_by_category = number_products_by_category
-        self.categories = self._get_categories()
+        self.categories = categories or self._get_categories()
 
     def _get_categories(self) -> list:
         """
@@ -91,6 +91,7 @@ class OpenFoodFactsAPI:
                 except (TypeError, KeyError):
                     raise OpenFoodFactsException(f"Error when retrieving products from category : {category}, "
                                                  f"response.content - {response.content}")
+
                 for product in products:
                     if not self._check_product_is_fr(product):
                         continue

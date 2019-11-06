@@ -19,7 +19,7 @@ def product_autocomplete(request):
     user_search = request.GET.get('term')
 
     if user_search is not None:
-        results = Product.search_autocomplete(user_search)
+        results = Product.objects.search_autocomplete(user_search)
 
         return JsonResponse(results, safe=False)
 
@@ -29,7 +29,7 @@ def product_search(request):
 
     if form.is_valid():
         user_search = form.cleaned_data['search']
-        better_products = Product.get_better_products(user_search)
+        better_products = Product.objects.get_better_products(user_search)
 
         return render(request, "products/results.html", {'better_products': better_products,
                                                          'user_search': user_search})

@@ -11,25 +11,30 @@
 
 
 .product-display {
+    display: flex;
     border: #1c7430 solid 1px;
     margin-top: 1rem;
 }
 
 .product-img {
-    max-width: 18rem;
-    max-height: 18rem;
+    /*max-width: 18rem;*/
+    /*max-height: 18rem;*/
     margin: 1rem 0;
-    width: auto;
-    height: auto;
+    /*width: auto;*/
+    /*height: auto;*/
+    object-fit: cover;
+    object-position: top left;
+    width: 18rem;
+    height: 18rem;
 }
 
 .nutriscore-img {
-    float: right;
+    /*float: right;*/
     border-radius: 50%;
     width: 3rem;
     position: relative;
-    right: 1rem;
-    top: 1rem;
+    /*right: 1rem;*/
+    /*top: 1rem;*/
 }
 
 .add-fav {

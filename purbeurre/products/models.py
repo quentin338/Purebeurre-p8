@@ -1,5 +1,7 @@
 from django.db import models
 
+from products.manager import ProductManager
+
 
 class Category(models.Model):
     name = models.CharField(max_length=200, unique=True)
@@ -16,6 +18,8 @@ class Product(models.Model):
     nutriscore_grade = models.CharField(max_length=1)
     ingredients_image = models.CharField(max_length=200)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
+
+    objects = ProductManager()
 
     def __str__(self):
         return self.name
@@ -52,16 +56,4 @@ class Product(models.Model):
         product_url = openff_url + str(self.code)
         return product_url
 
-    @staticmethod
-    def search_autocomplete(user_search):
-        results = Product.objects.filter(name__icontains=user_search).order_by('-nutriscore')[:10]
-        results = [product.name for product in results]
 
-        return results
-
-    @staticmethod
-    def get_better_products(user_search):
-        product_category = Product.objects.filter(name=user_search).first().category
-        better_products = product_category.products.order_by('nutriscore')[:6]
-
-        return better_products
