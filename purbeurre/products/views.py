@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
+from django.core.exceptions import ObjectDoesNotExist
 
 from .forms import SearchForm
 from .models import Product, Category
@@ -34,10 +35,13 @@ def product_search(request):
         return render(request, "products/results.html", {'better_products': better_products,
                                                          'user_search': user_search})
 
-    redirect(request, "products:index")
+    return redirect("products:index")
 
 
 def details(request, product_id):
-    product = Product.objects.get(code=product_id)
+    try:
+        product = Product.objects.get(code=product_id)
+    except ObjectDoesNotExist:
+        return redirect("products:index")
 
     return render(request, "products/details.html", {'product': product})

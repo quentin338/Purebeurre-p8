@@ -1,7 +1,7 @@
 from unittest import mock
 import json
 
-from django.test import TestCase
+from django.test import TestCase, tag
 
 from openfoodfacts.openfoodfacts_api import OpenFoodFactsAPI, OpenFoodFactsException
 
@@ -93,11 +93,21 @@ class TestOpenFoodFactsAPI(TestCase):
                              product['code'])
 
     def test_get_products_status_code_not_200(self):
-        self.mock_response.content = ""
+        self.mock_response.content = self.response_content_prod
         self.mock_response.status_code = 404
 
         api = OpenFoodFactsAPI(1, 1, ["Boissons"])
 
         with self.assertRaises(OpenFoodFactsException,
                                msg="Don't raise Exception when Status Code != 200"):
-            api.get_products()
+            next(api.get_products())
+
+    def test_get_products_no_response_content(self):
+        self.mock_response.content = ""
+        self.mock_response.status_code = 200
+
+        api = OpenFoodFactsAPI(1, 1, ["Boissons"])
+
+        with self.assertRaises(OpenFoodFactsException,
+                               msg="Don't raise Exception when Status Code != 200"):
+            next(api.get_products())
