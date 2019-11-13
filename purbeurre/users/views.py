@@ -7,16 +7,15 @@ from .forms import UserForm
 from .models import User
 
 
-def profile(request):
+def index(request):
     if request.user.is_authenticated:
-        return HttpResponse('Ceci est un profil utilisateur')
+        return redirect(reverse("users:user_account"))
     else:
-        return redirect("user registration")
+        return redirect("users:user_registration")
 
 
 def user_login(request):
     form = UserForm(request.GET or None)
-
     return render(request, 'users/login.html', {'form': form})
 
 
