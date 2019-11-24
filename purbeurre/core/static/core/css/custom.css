@@ -11,7 +11,7 @@
 
 
 .product-display {
-    display: flex;
+    /*display: flex;*/
     border: #1c7430 solid 1px;
     margin-top: 1rem;
 }
@@ -29,12 +29,11 @@
 }
 
 .nutriscore-img {
-    /*float: right;*/
     border-radius: 50%;
     width: 3rem;
     position: relative;
-    /*right: 1rem;*/
-    /*top: 1rem;*/
+    right: 1.70rem;
+    bottom: 8rem;
 }
 
 .add-fav {
@@ -50,6 +49,12 @@
         max-width: 15rem;
         max-height: 15rem;
     }
+
+    .nutriscore-img {
+    width: 2.5rem;
+    right: 1.4rem;
+    bottom: 7.2rem;
+    }
 }
 
 @media (max-width: 991px) {
@@ -57,11 +62,23 @@
         max-width: 10rem;
         max-height: 10rem;
     }
+
+    .nutriscore-img {
+    width: 2.2rem;
+    right: 1.3rem;
+    bottom: 4.8rem;
+    }
 }
 
 @media (max-width: 767px) {
     .product-img {
         max-width: 15rem;
         max-height: 15rem;
+    }
+
+    .nutriscore-img {
+    width: 3rem;
+    right: 1.7rem;
+    bottom: 6.8rem;
     }
 }
