@@ -11,7 +11,7 @@
       {% for product in better_products %}
         <div class="col-md-4 product-display">
           <a href="{% url "products:product_details" product_id=product.code %}">
-            <img src="{{ product.image_url }}" alt="Image du produit" class="product-img"/>
+            <img src="{{ product.image_url }}" alt="Image du produit" class="product-img" width=100 />
             <img src="{% static "core/img/nutriscore/"|add:product.nutriscore_img %}" class="nutriscore-img" alt="Nutriscore"/>
             <h3>{{ product.name|truncatechars:36 }}</h3></a>
           {% if user.is_authenticated %}
