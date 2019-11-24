@@ -1,16 +1,11 @@
 {% extends 'core/base.html' %}
 {% load static %}
 
-{% block masthead %}{% endblock %}
-{% block story %}{% endblock %}
-{% block contact %}{% endblock %}
-
 {% block title %}Résultats {{ user_search }}{% endblock %}
 
 {% block product_name %}{{ user_search }}{% endblock %}
 
-
-{% block list_products %}
+{% block content %}
   <div class="container">
     <div class="row">
       {% for product in better_products %}
@@ -30,7 +25,7 @@
 {% endblock %}
 
 {% block script %}
-  <script src='{% static "favorites/js/favorites.js" %}'></script>
+  {{ block.super }}
   <script>
     $(".add-fav").click(function() {
         $.post({% url "favorites:user_favorites" %},

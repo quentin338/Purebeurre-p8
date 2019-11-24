@@ -5,6 +5,7 @@ from django.db.utils import IntegrityError
 
 from .forms import UserForm
 from .models import User
+from products.forms import SearchForm
 
 
 def index(request):
@@ -15,8 +16,9 @@ def index(request):
 
 
 def user_login(request):
-    form = UserForm(request.GET or None)
-    return render(request, 'users/login.html', {'form': form})
+    user_form = UserForm(request.GET or None)
+    form = SearchForm(request.GET or None)
+    return render(request, 'users/login.html', {'user_form': user_form, 'form': form})
 
 
 def user_logout(request):
@@ -43,9 +45,10 @@ def user_check_login(request):
 
 
 def create_new_user(request):
-    form = UserForm(request.POST or None)
+    user_form = UserForm(request.GET or None)
+    form = SearchForm(request.GET or None)
 
-    return render(request, "users/registration.html", {'form': form})
+    return render(request, "users/registration.html", {'form': form, 'user_form': user_form})
 
 
 def add_new_user(request):
