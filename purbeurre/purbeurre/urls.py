@@ -20,6 +20,6 @@ urlpatterns = [
     path('', include('products.urls', namespace="products")),
     path('admin/', admin.site.urls),
     # path('products/', include('products.urls')),
-    path('favorites/', include('favorites.urls')),
+    path('favorites/', include('favorites.urls', namespace="favorites")),
     path('users/', include('users.urls')),
 ]

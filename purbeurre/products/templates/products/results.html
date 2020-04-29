@@ -26,12 +26,5 @@
 
 {% block script %}
   {{ block.super }}
-  <script>
-    $(".add-fav").click(function() {
-        $.post({% url "favorites:user_favorites" %},
-            {product: $(this).attr("data-code")}, function(data) {
-            console.log(data);
-        });
-    })
-  </script>
+  {% include "../favorites/fav_button.html" %}
 {% endblock %}

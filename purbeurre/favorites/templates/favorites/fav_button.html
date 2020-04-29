@@ -1,0 +1,10 @@
+{% if user.is_authenticated %}
+  <script>
+    $(".add-fav").click(function() {
+        $.post({% url "favorites:user_favorites" %},
+            {product: $(this).attr("data-code")}, function(data) {
+            console.log(data);
+        });
+    })
+  </script>
+{% endif %}
