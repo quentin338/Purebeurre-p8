@@ -3,7 +3,7 @@
 
 {% block title %}Résultats {{ user_search }}{% endblock %}
 
-{% block product_name %}{{ user_search }}{% endblock %}
+{% block product_name %}{{ user_search|capfirst }}{% endblock %}
 
 {% block content %}
   <div class="container">

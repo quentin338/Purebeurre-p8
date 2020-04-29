@@ -13,7 +13,10 @@ class ProductManager(models.Manager):
         return results
 
     def get_old_product(self, user_search):
-        old_product = super().get_queryset().filter(name=user_search).first()
+        # old_product = super().get_queryset().filter(name=user_search).first()
+        old_product = super().get_queryset().filter(models.Q(name=user_search) |
+                                                    models.Q(name__icontains=user_search))\
+                                            .first()
 
         return old_product
 
