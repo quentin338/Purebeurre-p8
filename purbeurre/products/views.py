@@ -13,7 +13,7 @@ def index(request):
     #     user_search = form.cleaned_data['search']
     #     return redirect("product_search", user_search=user_search)
 
-    return render(request, "products/index.html", {'form': form})
+    return render(request, "products/index.html", {"form": form})
 
 
 def product_autocomplete(request):
@@ -29,11 +29,15 @@ def product_search(request):
     form = SearchForm(request.GET or None)
 
     if form.is_valid():
-        user_search = form.cleaned_data['search']
-        better_products = Product.objects.get_better_products(user_search)
-
-        return render(request, "products/results.html", {'better_products': better_products,
-                                                         'user_search': user_search})
+        user_search = form.cleaned_data["search"]
+        old_product = Product.objects.get_old_product(user_search)
+        better_products = Product.objects.get_better_products(old_product)
+        # print(better_products)
+        # print(old_product)
+        return render(request, "products/results.html", {"better_products": better_products,
+                                                         "user_search": user_search,
+                                                         "old_product": old_product}
+                      )
 
     return redirect("products:index")
 

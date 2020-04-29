@@ -2,7 +2,8 @@
   <script>
     $(".add-fav").click(function() {
         $.post({% url "favorites:user_favorites" %},
-            {product: $(this).attr("data-code")}, function(data) {
+            {old_product: $(this).attr("data-old-code"),
+            new_product: $(this).attr("data-code")}, function(data) {
             console.log(data);
         });
     })

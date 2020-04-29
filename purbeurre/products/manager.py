@@ -12,9 +12,14 @@ class ProductManager(models.Manager):
 
         return results
 
-    def get_better_products(self, user_search):
+    def get_old_product(self, user_search):
+        old_product = super().get_queryset().filter(name=user_search).first()
+
+        return old_product
+
+    def get_better_products(self, old_product):
         # product_category = Product.objects.filter(name=user_search).first().category
-        product_category = super().get_queryset().filter(name=user_search).first().category
+        product_category = old_product.category
         better_products = product_category.products.order_by('nutriscore')[:6]
 
         return better_products
