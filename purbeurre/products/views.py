@@ -9,10 +9,6 @@ from .models import Product, Category
 def index(request):
     form = SearchForm(request.GET or None)
 
-    # if form.is_valid():
-    #     user_search = form.cleaned_data['search']
-    #     return redirect("product_search", user_search=user_search)
-
     return render(request, "products/index.html", {"form": form})
 
 

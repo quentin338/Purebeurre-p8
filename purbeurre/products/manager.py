@@ -2,7 +2,6 @@ from django.db import models
 
 
 class ProductManager(models.Manager):
-
     def search_autocomplete(self, user_search):
         # results = Product.objects.filter(name__icontains=user_search).order_by('-nutriscore')[:10]
         results = super().get_queryset().filter(name__icontains=user_search) \
