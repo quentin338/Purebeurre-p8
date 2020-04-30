@@ -6,7 +6,6 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import Favorite
 
 
-@csrf_exempt
 def user_favorites(request):
     if request.user.is_authenticated:
         # print(request.POST)
@@ -16,9 +15,9 @@ def user_favorites(request):
         print(new_product_code)
         print(request.user)
 
-        Favorite.objects.create(old_product_code=old_product_code,
-                                new_product_id=new_product_code,
-                                user_id=request.user)
+        # Favorite.objects.create(old_product=old_product_code,
+        #                         new_product=new_product_code,
+        #                         user=request.user)
 
         return JsonResponse({"key": "value"})
 
