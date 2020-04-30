@@ -2,9 +2,9 @@
   <script>
     $(".add-fav").click(function() {
         $.post({% url "favorites:user_favorites" %},
-            {old_product: $(this).attr("data-old-code"),
-            new_product: $(this).attr("data-code")}, function(data) {
-            console.log(data);
+            {old_product_code: $(this).attr("data-old-code"),
+            new_product_code: $(this).attr("data-code")}, function(data) {
+            console.log("favorite added !");
         });
     })
   </script>

@@ -5,6 +5,9 @@ from .manager import FavoriteManager
 
 
 class Favorite(models.Model):
+    class Meta:
+        unique_together = (('user', 'new_product', 'ancient_product'),)
+
     objects = FavoriteManager()
 
     date = models.DateTimeField(auto_now_add=True)
