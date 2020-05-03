@@ -4,6 +4,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from .forms import SearchForm
 from .models import Product, Category
+from favorites.models import Favorite
 
 
 def index(request):
@@ -28,8 +29,13 @@ def product_search(request):
         user_search = form.cleaned_data["search"]
         old_product = Product.objects.get_old_product(user_search)
         better_products = Product.objects.get_better_products(old_product)
-        # print(better_products)
-        # print(old_product)
+
+        if request.user.is_authenticated:
+            for product in better_products:
+                product.is_favorite = Favorite.objects\
+                                      .is_favorite(request.user, old_product,
+                                                   new_product=product)
+
         return render(request, "products/results.html", {"better_products": better_products,
                                                          "user_search": user_search,
                                                          "old_product": old_product}

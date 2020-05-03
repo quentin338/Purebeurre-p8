@@ -9,3 +9,7 @@ class FavoriteManager(models.Manager):
         except IntegrityError as e:
             print(e)
             pass
+
+    def is_favorite(self, user, ancient_product, new_product):
+        return bool(self.filter(user=user, ancient_product=ancient_product,
+                                new_product=new_product))

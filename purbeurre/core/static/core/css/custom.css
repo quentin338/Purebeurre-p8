@@ -51,7 +51,7 @@
     bottom: 8rem;
 }
 
-.add-fav {
+.add-fav, .remove-fav {
     margin-bottom: 1rem;
 }
 

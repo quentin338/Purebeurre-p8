@@ -15,8 +15,13 @@
             <img src="{% static "core/img/nutriscore/"|add:product.nutriscore_img %}" class="nutriscore-img" alt="Nutriscore"/>
             <h3>{{ product.name|truncatechars:36 }}</h3></a>
           {% if user.is_authenticated %}
-            <a class="btn btn-primary btn-xs add-fav" data-code="{{ product.code }}" data-old-code="{{ old_product.code }}">
-              <i class="fa fa-floppy-o" aria-hidden="true"></i> Favori</a>
+            {% if product.is_favorite %}
+              <button onclick="onClickHandler(event)" class="btn btn-danger btn-xs remove-fav" data-code="{{ product.code }}" data-old-code="{{ old_product.code }}">
+                <i class="fa fa-trash-o" aria-hidden="true"></i> Favori</button>
+            {% else %}
+              <button onclick="onClickHandler(event)" class="btn btn-success btn-xs add-fav" data-code="{{ product.code }}" data-old-code="{{ old_product.code }}">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i> Favori</button>
+            {% endif %}
           {% endif %}
         </div>
       {% endfor %}
