@@ -43,3 +43,11 @@ def show_favorites(request):
         return render(request, "favorites/show_favorites.html", {"favorites": favorites})
     else:
         redirect("users:user_login")
+
+
+def user_favorites_add(request):
+    return JsonResponse({"key": "value"})
+
+
+def user_favorites_delete(request):
+    return JsonResponse({"key": "value"})

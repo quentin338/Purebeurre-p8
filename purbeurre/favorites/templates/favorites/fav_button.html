@@ -1,14 +1,14 @@
 {% if user.is_authenticated %}
   <script>
     function addFavorite(old_code, new_code) {
-        $.post({% url "favorites:user_favorites" %},
+        $.post("{% url "favorites:user_favorites_add" %}",
             {old_product_code: old_code, new_product_code: new_code}, function(data) {
           console.log("fav added !");
             });
     }
 
     function deleteFavorite(old_code, new_code) {
-        $.get({% url "favorites:user_favorites" %},
+        $.post("{% url "favorites:user_favorites_delete" %}",
             {old_product_code: old_code, new_product_code: new_code}, function(data) {
               console.log("fav removed !");
             });
