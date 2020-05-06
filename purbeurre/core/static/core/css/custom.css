@@ -25,6 +25,14 @@
     filter: invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(97%);
 }
 
+label {
+    color: white;
+}
+
+.password-field {
+    margin-right: 4.1rem;
+}
+
 .product-display {
     /*display: flex;*/
     border: #1c7430 solid 1px;
@@ -64,6 +72,14 @@
 
 .bg-product {
     background-repeat: no-repeat;
+}
+
+.ctx-message {
+    width: 40rem;
+    margin: auto;
+    border: 2px solid white;
+    border-bottom-left-radius: 20%;
+    border-bottom-right-radius: 20%;
 }
 
 @media (max-width: 1199px) {

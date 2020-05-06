@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib import messages
 
 from .forms import SearchForm
 from .models import Product, Category
@@ -28,6 +29,11 @@ def product_search(request):
     if form.is_valid():
         user_search = form.cleaned_data["search"]
         old_product = Product.objects.get_old_product(user_search)
+
+        if old_product is None:
+            messages.add_message(request, messages.INFO, f"Désolé ! Nous n'avons rien trouvé pour remplacer {user_search}.")
+            return redirect("products:index")
+
         better_products = Product.objects.get_better_products(old_product)
 
         if request.user.is_authenticated:
