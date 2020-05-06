@@ -1,5 +1,6 @@
 import json
 import re
+import html
 
 import requests
 
@@ -99,7 +100,7 @@ class OpenFoodFactsAPI:
                     try:
                         product_dict = {
                             'code': product['code'],
-                            'name': product['product_name_fr'],
+                            'name': html.unescape(product['product_name_fr']),
                             'image_url': product['image_url'],
                             'nutriscore': product['nutrition_score_debug'],
                             'nutriscore_grade': product['nutriscore_grade'],
