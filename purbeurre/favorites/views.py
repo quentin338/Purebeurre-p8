@@ -34,3 +34,12 @@ def user_favorites(request):
 
         return JsonResponse({"key": "value"})
 
+
+def show_favorites(request):
+    if request.user.is_authenticated:
+        favorites = Favorite.objects.filter(user=request.user).order_by("-date")
+        print(favorites)
+
+        return render(request, "favorites/show_favorites.html", {"favorites": favorites})
+    else:
+        redirect("users:user_login")
