@@ -24,9 +24,9 @@ def user_favorites_add(request):
             ancient_product = Product.objects.get(code=ancient_product_code)
             new_product = Product.objects.get(code=new_product_code)
 
-            Favorite.objects.create_favorite(ancient_product=ancient_product,
-                                             new_product=new_product,
-                                             user=request.user)
+            Favorite.objects.get_or_create(ancient_product=ancient_product,
+                                           new_product=new_product,
+                                           user=request.user)
 
     return JsonResponse({"key": "value"})
 
