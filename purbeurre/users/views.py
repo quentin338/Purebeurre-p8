@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse
 from django.contrib.auth import logout, login, authenticate
+from django.contrib import messages
 from django.db.utils import IntegrityError
 
 from .forms import UserForm
@@ -62,8 +63,7 @@ def add_new_user(request):
             user = User.objects.create_user(email=user_mail, password=user_password)
             return redirect("users:user_login")
         except IntegrityError as e:
-            print(e)
-            pass
+            messages.add_message(request, messages.INFO, "Cet email a déjà un compte.")
 
     return redirect("users:user_registration")
 

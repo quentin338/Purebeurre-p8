@@ -1,10 +1,11 @@
 from unittest import mock, skip
 
-from django.test import TestCase
+from django.test import TestCase, tag
 from django.shortcuts import reverse
 from django.db.utils import IntegrityError
 
 from users.models import User
+from users.manager import UserManager
 
 
 class TestUserViews(TestCase):
@@ -99,7 +100,8 @@ class TestUserViews(TestCase):
         self.assertEqual(2, len(users))
         self.assertRedirects(response, reverse("users:user_login"))
 
-    @skip  # How to check a passed Exception ?
+    @skip
+    @tag("message")
     def test_add_new_user_already_exists(self):
         self.mock_form.is_valid.return_value = True
         self.mock_form.cleaned_data = {
@@ -123,3 +125,13 @@ class TestUserViews(TestCase):
         response = self.client.get(reverse("users:user_account"))
 
         self.assertRedirects(response, reverse("users:user_login"))
+
+    # UserManager
+    def test_create_user_without_email(self):
+        user = {
+            "email": "",
+            "password": "test"
+        }
+
+        with self.assertRaises(ValueError):
+            User.objects.create_user(**user)

@@ -2,7 +2,7 @@ import os
 import json
 from unittest import mock, skip
 
-from django.test import TestCase
+from django.test import TestCase, tag
 from django.shortcuts import reverse
 
 from products.models import Product, Category
@@ -54,11 +54,13 @@ class ProductModelTests(TestCase):
         self.assertEqual(worst_prod.name, products[0], msg="The first product is not the worst")
 
     def test_better_products_first_six(self):
-        products = Product.objects.get_better_products("Saucisson sec")
+        product = Product.objects.get(code=98765)
+        products = Product.objects.get_better_products(old_product=product)
         self.assertEqual(6, len(products))
 
     def test_better_products_best_product_first(self):
-        products = Product.objects.get_better_products("Saucisson sec")
+        product = Product.objects.get(code=98765)
+        products = Product.objects.get_better_products(old_product=product)
         self.assertEqual(self.best_prod.code, products[0].code)
 
 
@@ -103,11 +105,9 @@ class ProductViewTests(TestCase):
         self.assertEqual(10, len(response.json()))
         self.assertListEqual(["Saucisson"]*10, response.json())
 
-    @skip
     def test_product_autocomplete_no_user_search(self):
-        response = self.client.get(reverse('products:product_autocomplete'))
-        print(response)
-        self.assertIsNone(response.content)
+        with self.assertRaises(ValueError):
+            self.client.get(reverse('products:product_autocomplete'))
 
     # product_search()
     def test_product_search_form_valid(self):
@@ -129,6 +129,16 @@ class ProductViewTests(TestCase):
         with mock.patch("products.views.SearchForm") as MockFormClass:
             mock_form = MockFormClass.return_value
             mock_form.is_valid.return_value = False
+
+            response = self.client.get(reverse('products:product_search'))
+
+            self.assertRedirects(response, reverse("products:index"))
+
+    @tag("message")
+    def test_product_search_no_old_product(self):
+        with mock.patch("products.views.SearchForm") as MockFormClass:
+            mock_form = MockFormClass.return_value
+            mock_form.is_valid.return_value = True
 
             response = self.client.get(reverse('products:product_search'))
 
