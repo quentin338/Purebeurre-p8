@@ -12,7 +12,7 @@ def show_favorites(request):
         favorites = Favorite.objects.filter(user=request.user).order_by("-date")
         return render(request, "favorites/show_favorites.html", {"favorites": favorites})
     else:
-        redirect("users:user_login")
+        return redirect("users:user_login")
 
 
 def user_favorites_add(request):
