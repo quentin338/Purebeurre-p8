@@ -6,7 +6,6 @@ from django.test import TestCase, tag
 from django.shortcuts import reverse
 
 from products.models import Product, Category
-from products.views import index, product_autocomplete, product_search, details
 
 
 class ProductModelTests(TestCase):

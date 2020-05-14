@@ -40,6 +40,8 @@ def user_check_login(request):
         if user:
             login(request, user)
         else:
+            messages.add_message(request, messages.INFO, "Nom d'utilisateur ou mot de passe "
+                                                         "incorrect.")
             return redirect("users:user_login")
 
     return redirect(reverse("products:index"))

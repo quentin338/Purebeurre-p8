@@ -1,6 +1,6 @@
 import random
 
-from django.test import TestCase, tag
+from django.test import TestCase
 from django.shortcuts import reverse
 
 from model_bakery import baker
@@ -39,6 +39,7 @@ class FavoriteViewTest(TestCase):
                                                 new_product=self.new_product)
         self.client.login(email=self.user.email, password="password")
 
+    # user_favorites_add()
     def test_user_favorites_add(self):
         new_product = baker.make("Product")
         # print("new product code", new_product.code)
@@ -49,6 +50,7 @@ class FavoriteViewTest(TestCase):
 
         self.assertEqual(len(Favorite.objects.all()), 2)
 
+    # user_favorites_delete()
     def test_user_favorites_delete(self):
         self.client.post(reverse("favorites:user_favorites_delete"),
                          {"old_product_code": self.old_product.code,
@@ -56,11 +58,11 @@ class FavoriteViewTest(TestCase):
 
         self.assertFalse(Favorite.objects.all())
 
+    # show_favorites()
     def test_show_favorites_user_is_logged(self):
         response = self.client.get(reverse("favorites:show_favorites"))
         self.assertTemplateUsed(response, "favorites/show_favorites.html")
 
-    @tag("first")
     def test_show_favorites_user_is_not_logged(self):
         self.client.logout()
 

@@ -1,3 +1,4 @@
 -r prod.txt
 coverage==5.1
 model-bakery==1.1.0
+selenium==3.141.0

@@ -5,7 +5,6 @@ from django.shortcuts import reverse
 from django.db.utils import IntegrityError
 
 from users.models import User
-from users.manager import UserManager
 
 
 class TestUserViews(TestCase):
