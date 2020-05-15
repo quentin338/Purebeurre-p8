@@ -9,6 +9,10 @@
     height: 23px;
 }
 
+.burger-menu {
+    display: none;
+}
+
 .navbar-nav .carrot-icon {
     filter: invert(78%) sepia(0%) saturate(1657%) hue-rotate(148deg) brightness(95%) contrast(103%);
 }
@@ -117,6 +121,10 @@ label {
     width: 2.2rem;
     right: 1.3rem;
     bottom: 4.8rem;
+    }
+
+    .burger-menu {
+    display: inline;
     }
 }
 

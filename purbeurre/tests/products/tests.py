@@ -4,6 +4,7 @@ from unittest import mock, skip
 
 from django.test import TestCase, tag
 from django.shortcuts import reverse
+from django.contrib.messages import get_messages
 
 from products.models import Product, Category
 
@@ -133,14 +134,15 @@ class ProductViewTests(TestCase):
 
             self.assertRedirects(response, reverse("products:index"))
 
-    @tag("message")
     def test_product_search_no_old_product(self):
         with mock.patch("products.views.SearchForm") as MockFormClass:
             mock_form = MockFormClass.return_value
             mock_form.is_valid.return_value = True
 
             response = self.client.get(reverse('products:product_search'))
+            messages = [m.message for m in get_messages(response.wsgi_request)]
 
+            self.assertEqual(1, len(messages))
             self.assertRedirects(response, reverse("products:index"))
 
     # details()

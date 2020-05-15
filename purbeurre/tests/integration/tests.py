@@ -13,7 +13,7 @@ class AccountTestCase(LiveServerTestCase):
         self.selenium.quit()
         super(AccountTestCase, self).tearDown()
 
-    def test_register(self):
+    def test_existing_user_can_login(self):
         self.selenium.get("http://127.0.0.1:8000/users/login")
 
         email = self.selenium.find_element_by_id("id_email")
