@@ -18,6 +18,8 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
   <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Scope+One" rel="stylesheet" type="text/css">
 
   <!-- Plugin CSS -->
   <link href='{% static "core/vendor/magnific-popup/magnific-popup.css" %}' rel="stylesheet">
@@ -55,7 +57,15 @@
   <!-- Footer -->
   <footer class="bg-light py-5">
     <div class="container">
-      <div class="small text-center text-muted">Copyright &copy; 2019 - Start Bootstrap</div>
+{#      <div class="col-lg-4 small text-center text-muted">Copyright &copy; 2019 - Start Bootstrap</div>#}
+      <div class="row">
+        <div class="col-lg-6 small text-center text-muted">
+          <a href="#nothing">Mentions légales</a>
+        </div>
+        <div class="col-lg-6 small text-center text-muted">
+          <a href="mailto:direct@danslesspams.com">Contact</a>
+        </div>
+      </div>
     </div>
   </footer>
 {% endblock %}

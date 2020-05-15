@@ -10,6 +10,6 @@
 {% block search %}
   <form action="{% url 'products:product_search' %}" method="get" class="search-form">
     {{ form.as_p }}
-    <input type="submit" value="Rechercher"/>
+    <input class="btn btn-light" type="submit" value="Rechercher"/>
   </form>
 {% endblock %}

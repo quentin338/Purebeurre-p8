@@ -29,6 +29,18 @@ label {
     color: white;
 }
 
+.portrait-rat {
+    width: 12rem;
+    height: 18rem;
+    margin: 0 3rem 0;
+}
+
+.portrait-col {
+    width: 10rem;
+    height: 20rem;
+    margin: 0 3rem 0;
+}
+
 .password-field {
     margin-right: 4.1rem;
 }
