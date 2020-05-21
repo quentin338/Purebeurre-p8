@@ -12,7 +12,7 @@
 #### Install DB
 - python manage.py migrate
 #### Populate DB
-- python manage.py -c XX -p YY  
+- python manage.py db_init -c XX -p YY  
 *-c* for the number of categories  
 *-p* for the number of products by category
 

@@ -23,6 +23,7 @@
 
   <!-- Plugin CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
   <!-- Theme CSS - Includes Bootstrap -->
 {#  <link href='{% static "core/css/creative.min.css" %}' rel="stylesheet">#}
@@ -80,7 +81,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
   <!-- Custom scripts for this template -->
 {#  <script src='{% static "core/js/creative.min.js" %}'></script>#}
-  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
   <script src='{% static "core/js/jquery-ui.min.js" %}'></script>
   <script src='{% static "dist/js/scripts.js" %}'></script>
   
@@ -89,7 +90,7 @@
     minLength: 3
   });
   </script>
-  <script>{% include "core/csrftoken.js" %}</script>
+  <script>{% include "core/js/csrftoken.js" %}</script>
 {% endblock %}
 
 </body>

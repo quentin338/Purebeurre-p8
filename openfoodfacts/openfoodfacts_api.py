@@ -77,7 +77,8 @@ class OpenFoodFactsAPI:
                     'sort_by': 'unique_scans_n',
                     'page_size': str(self._PRODUCTS_BY_PAGE),
                     'page': str(page_number),
-                    'json': 'true'
+                    'json': 'true',
+                    # 'fields': ''
                 }
 
                 response = requests.get(self._PRODUCTS_URL, params=params)
