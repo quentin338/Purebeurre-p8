@@ -137,4 +137,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 # User model
 AUTH_USER_MODEL = "users.User"
 
+DEBUG_PROPAGATE_EXCEPTIONS = True
+
 django_heroku.settings(locals())
