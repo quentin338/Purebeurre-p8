@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 
 <head>
@@ -9,24 +10,23 @@
   <meta name="author" content="">
 
   <title>Pur Beurre - {% block title %}Trouvez des produits sains{% endblock %}</title>
-  
-  {% load static %}
+
   <!-- Font Awesome Icons -->
-  <link href='{% static "core/vendor/fontawesome-free/css/all.min.css" %}' rel="stylesheet" type="text/css">
+{#  <link href='{% static "core/vendor/fontawesome-free/css/all.min.css" %}' rel="stylesheet" type="text/css">#}
   <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
-  <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
   <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
   <link href="http://fonts.googleapis.com/css?family=Scope+One" rel="stylesheet" type="text/css">
 
   <!-- Plugin CSS -->
-  <link href='{% static "core/vendor/magnific-popup/magnific-popup.css" %}' rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet" />
 
   <!-- Theme CSS - Includes Bootstrap -->
-  <link href='{% static "core/css/creative.min.css" %}' rel="stylesheet">
-  <link href='{% static "core/css/custom.css" %}' rel="stylesheet">
+{#  <link href='{% static "core/css/creative.min.css" %}' rel="stylesheet">#}
+  <link href='{% static "dist/css/styles.css" %}' rel="stylesheet" />
 
   <!-- Favicon -->
   <link rel="shortcut icon" href="{% static 'core/img/logo_pur_beurre-favicon.png' %}">
@@ -72,17 +72,17 @@
 
 {% block script %}
   <!-- Bootstrap core JavaScript -->
-  <script src='{% static "core/vendor/jquery/jquery.min.js" %}'></script>
-  <script src='{% static "core/vendor/bootstrap/js/bootstrap.bundle.min.js" %}'></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
 
   <!-- Plugin JavaScript -->
-  <script src='{% static "core/vendor/jquery-easing/jquery.easing.min.js" %}'></script>
-  <script src='{% static "core/vendor/magnific-popup/jquery.magnific-popup.min.js" %}'></script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
   <!-- Custom scripts for this template -->
-  <script src='{% static "core/js/creative.min.js" %}'></script>
+{#  <script src='{% static "core/js/creative.min.js" %}'></script>#}
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src='{% static "core/js/jquery-ui.min.js" %}'></script>
+  <script src='{% static "dist/js/scripts.js" %}'></script>
   
   <script type="text/javascript">$(".search-form").autocomplete({
     source: "{% url 'products:product_autocomplete' %}",
