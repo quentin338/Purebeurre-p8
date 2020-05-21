@@ -62,7 +62,6 @@ class OpenFoodFactsAPI:
             page_number = 1
 
             while products_added < self._number_products_by_category:
-                print("ajout de produit", category)
                 # Filtering products
                 params = {
                     'action': 'process',
@@ -79,7 +78,9 @@ class OpenFoodFactsAPI:
                     'page_size': str(self._PRODUCTS_BY_PAGE),
                     'page': str(page_number),
                     'json': 'true',
-                    # 'fields': ''
+                    'fields': 'code,product_name_fr,image_url,'
+                              'nutriscore_score,nutriscore_grade,selected_images,'
+                              'countries_lc,categories_lc,labels_lc'
                 }
 
                 response = requests.get(self._PRODUCTS_URL, params=params)
@@ -109,25 +110,15 @@ class OpenFoodFactsAPI:
                             'ingredients_image': product['selected_images']['ingredients']['display']['fr'],
                             'category': category
                         }
-                    except KeyError as e:
-                        print(e)
+                    except KeyError:
                         continue
 
-                    # One value is missing or we don't have the french nutriscore or the grade is not valid
+                    # One value is missing or the grade is not valid
                     # or product name is breaking 150 chars long constraint
                     product_values = set(product_dict.values())
-                    if "" in product_values or not product_dict['nutriscore'] \
-                            or not re.fullmatch("[a-eA-E]", product_dict['nutriscore_grade'])\
+                    if "" in product_values or not re.fullmatch("[a-eA-E]", product_dict['nutriscore_grade'])\
                             or len(product_dict['name']) > 150:
                         continue
-
-                    # Notes are on the form X | -X | XX at the end of the string - FR note always at the end
-                    # nutriscore = product_dict['nutriscore']
-                    # nutriscore = nutriscore[-2:].strip()
-                    # try:
-                    #     product_dict['nutriscore'] = int(nutriscore)
-                    # except ValueError:
-                    #     continue
 
                     # Checking that the product is unique based on his name
                     # To avoid breaking unicity constraint SQL side
