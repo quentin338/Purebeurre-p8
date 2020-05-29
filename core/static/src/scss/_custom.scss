@@ -1,3 +1,7 @@
+body {
+    min-height: 100vh;
+}
+
 .logo-purbeurre {
     width: 30px;
     height: 30px;
@@ -27,6 +31,10 @@
 
 .navbar-scrolled .carrot-icon:hover {
     filter: invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(97%);
+}
+
+.bg-nav-search {
+    background-color: #e2e6ea;
 }
 
 label {
@@ -96,6 +104,14 @@ label {
     border: 2px solid white;
     border-bottom-left-radius: 20%;
     border-bottom-right-radius: 20%;
+}
+
+.credit-text {
+    font-size: 1.5rem;
+}
+
+.bg-gradient {
+    background: linear-gradient($caramel, $rooibos);
 }
 
 @media (max-width: 1199px) {
