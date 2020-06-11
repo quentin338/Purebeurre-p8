@@ -139,4 +139,5 @@ AUTH_USER_MODEL = "users.User"
 
 DEBUG_PROPAGATE_EXCEPTIONS = True
 
-django_heroku.settings(locals())
+if os.getenv("ENV") == "production":
+    django_heroku.settings(locals())
