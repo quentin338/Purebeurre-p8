@@ -44,7 +44,7 @@ body {
 }
 
 .bg-nav-search {
-  background-color: #e2e6ea;
+  background-color: #f9f9f9;
 }
 
 label {
@@ -74,10 +74,6 @@ label {
 }
 
 .product-img {
-  /*max-width: 18rem;*/
-  /*max-height: 18rem;*/
-  /*width: auto;*/
-  /*height: auto;*/
   margin: 1rem 0;
   -o-object-fit: cover;
      object-fit: cover;
