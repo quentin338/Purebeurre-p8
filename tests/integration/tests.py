@@ -3,6 +3,8 @@ from selenium.webdriver.chrome.options import Options
 
 from django.test import LiveServerTestCase
 
+from users.models import User
+
 
 chrome_options = Options()
 chrome_options.add_argument("--headless")
@@ -13,13 +15,14 @@ class AccountTestCase(LiveServerTestCase):
         self.selenium = webdriver.Chrome(options=chrome_options)
         self.selenium.implicitly_wait(5)
         super(AccountTestCase, self).setUp()
+        User.objects.create_user(email="test@test.com", password="Test#2020")
 
     def tearDown(self) -> None:
         self.selenium.quit()
         super(AccountTestCase, self).tearDown()
 
     def test_existing_user_can_login(self):
-        self.selenium.get("http://127.0.0.1:8000/users/login")
+        self.selenium.get(f"{self.live_server_url}/users/login")
 
         email = self.selenium.find_element_by_id("id_email")
         password = self.selenium.find_element_by_id("id_password")
@@ -27,7 +30,7 @@ class AccountTestCase(LiveServerTestCase):
         self.assertIn("Se connecter", self.selenium.title)
 
         email.send_keys("test@test.com")
-        password.send_keys("test")
+        password.send_keys("Test#2020")
 
         submit_button = self.selenium.find_element_by_css_selector("input.btn-light")
         submit_button.click()
